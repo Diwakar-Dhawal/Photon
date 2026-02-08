@@ -176,6 +176,18 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(process.cwd(), "ui", "index.html"));
 });
 
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "ui", "login.html"));
+});
+
+app.get("/register", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "ui", "register.html"));
+});
+
+app.get("/dashboard", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "ui", "dashboard.html"));
+});
+
 app.get("/health", (req, res) => {
   res.json({
     status: "ok",

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Photon · Dashboard</title>
+    <link rel="stylesheet" href="/ui/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="logo">Photon</div>
+        <nav class="nav">
+          <button class="nav-item active">Dashboard</button>
+          <a class="nav-item" href="/dashboard">Collections</a>
+          <a class="nav-item" href="/dashboard">Face Groups</a>
+          <a class="nav-item" href="/dashboard">Permissions</a>
+        </nav>
+        <div class="profile-card">
+          <div class="profile-name">Local Owner</div>
+          <div class="profile-role">OWNER · Full Access</div>
+        </div>
+        <div class="env-card">
+          <div class="env-label">Environment</div>
+          <div class="env-value">Local · Storage: Disk</div>
+          <div class="env-meta">Face detection: Local</div>
+        </div>
+      </aside>
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <h1>Dashboard</h1>
+            <p class="subtitle">Monitor collections, uploads, and face matches.</p>
+          </div>
+          <div class="actions">
+            <a class="ghost" href="/login">Logout</a>
+            <button class="primary">New Collection</button>
+          </div>
+        </header>
+        <section class="stats-grid">
+          <div class="stat-card">
+            <p class="stat-label">Collections</p>
+            <h3>12</h3>
+            <span class="stat-meta">+2 this week</span>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Photos</p>
+            <h3>328</h3>
+            <span class="stat-meta">74% tagged</span>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Face groups</p>
+            <h3>38</h3>
+            <span class="stat-meta">6 unnamed</span>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Active members</p>
+            <h3>7</h3>
+            <span class="stat-meta">Roles synced</span>
+          </div>
+        </section>
+        <section class="activity-grid">
+          <div class="card">
+            <h3>Recent uploads</h3>
+            <ul class="activity-list">
+              <li>
+                <strong>Q2 Campaign</strong>
+                <span>12 photos · Member</span>
+              </li>
+              <li>
+                <strong>Headshots</strong>
+                <span>6 photos · Owner</span>
+              </li>
+              <li>
+                <strong>Event Recap</strong>
+                <span>18 photos · Viewer</span>
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Permission snapshots</h3>
+            <div class="pill-row">
+              <span class="pill">OWNER: 2</span>
+              <span class="pill">MEMBER: 3</span>
+              <span class="pill">VIEWER: 6</span>
+            </div>
+            <p class="muted">Roles can be adjusted per collection.</p>
+          </div>
+          <div class="card">
+            <h3>Face processing</h3>
+            <p>Local ML pipeline running.</p>
+            <div class="progress">
+              <div class="progress-bar" style="width: 72%"></div>
+            </div>
+            <p class="muted">72% of photos grouped.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
