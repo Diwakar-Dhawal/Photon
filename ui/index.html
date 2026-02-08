@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Photon</title>
+    <link rel="stylesheet" href="/ui/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="logo">Photon</div>
+        <nav class="nav">
+          <button class="nav-item active">Collections</button>
+          <button class="nav-item">Face Groups</button>
+          <button class="nav-item">Settings</button>
+        </nav>
+        <div class="env-card">
+          <div class="env-label">Environment</div>
+          <div class="env-value">Local · Storage: Disk</div>
+          <div class="env-meta">Face detection: Local</div>
+        </div>
+      </aside>
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <h1>Collections</h1>
+            <p class="subtitle">Manage photos and roles across teams.</p>
+          </div>
+          <div class="actions">
+            <button class="ghost">Share</button>
+            <button class="primary">New Collection</button>
+          </div>
+        </header>
+        <section class="overview">
+          <div class="card">
+            <h3>Storage Strategy</h3>
+            <p>Local disk with cloud-ready abstraction via ENV configs.</p>
+            <ul>
+              <li>APP_ENV: local | dev | prod</li>
+              <li>STORAGE_TYPE: local | supabase</li>
+              <li>FACE_DETECTION_MODE: local | api</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Access Control</h3>
+            <p>Owner, Member, Viewer permissions applied per collection.</p>
+            <div class="pill-row">
+              <span class="pill">OWNER</span>
+              <span class="pill">MEMBER</span>
+              <span class="pill">VIEWER</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Face Grouping</h3>
+            <p>Upload triggers detection, embeddings, and smart grouping.</p>
+            <button class="ghost small">View Groups</button>
+          </div>
+        </section>
+        <section class="gallery-header">
+          <div>
+            <h2>Collection Gallery</h2>
+            <p class="subtitle">Auto-grouped by detected faces.</p>
+          </div>
+          <div class="toggle">
+            <button class="toggle-btn active">Grid</button>
+            <button class="toggle-btn">Faces</button>
+          </div>
+        </section>
+        <section class="upload-card">
+          <div class="upload-zone">
+            <div class="upload-icon">⬆️</div>
+            <div>
+              <p><strong>Drag & drop</strong> photos to upload</p>
+              <p class="muted">or browse from your device</p>
+            </div>
+            <button class="primary">Upload</button>
+          </div>
+        </section>
+        <section class="grid">
+          <div class="photo-card">
+            <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="photo-meta">
+              <span>Team Offsite</span>
+              <span class="tag">Owner</span>
+            </div>
+          </div>
+          <div class="photo-card">
+            <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="photo-meta">
+              <span>Studio Day</span>
+              <span class="tag">Member</span>
+            </div>
+          </div>
+          <div class="photo-card">
+            <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="photo-meta">
+              <span>Product Shoot</span>
+              <span class="tag">Viewer</span>
+            </div>
+          </div>
+          <div class="photo-card">
+            <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="photo-meta">
+              <span>Community Meetup</span>
+              <span class="tag">Member</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

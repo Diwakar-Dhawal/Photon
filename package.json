@@ -1,0 +1,19 @@
+{
+  "name": "photon",
+  "version": "0.1.0",
+  "description": "Minimalistic photo collection app with RBAC and face grouping (MVP skeleton)",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "nanoid": "^5.0.7"
+  }
+}
