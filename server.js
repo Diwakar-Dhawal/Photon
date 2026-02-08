@@ -6,6 +6,11 @@ import multer from "multer";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { nanoid } from "nanoid";
+import {
+  detectFacesFromBuffer,
+  ensureModelsPresent,
+  initializeFaceDetection,
+} from "./faceDetection.js";
 
 dotenv.config();
 
@@ -39,6 +44,21 @@ ensureStorage();
 app.use(express.json());
 app.use("/ui", express.static(path.join(process.cwd(), "ui")));
 app.use("/uploads", express.static(config.localStoragePath));
+
+let faceModelsReady = false;
+
+if (config.faceDetectionMode === "local") {
+  initializeFaceDetection()
+    .then((ready) => {
+      faceModelsReady = ready;
+      if (!ready) {
+        console.warn("Face detection models missing. See README.md to install.");
+      }
+    })
+    .catch((error) => {
+      console.error("Face detection initialization failed:", error);
+    });
+}
 
 const authRequired = (req, res, next) => {
   const auth = req.headers.authorization || "";
@@ -266,7 +286,7 @@ app.post(
   "/photos/upload",
   authRequired,
   uploader.single("photo"),
-  (req, res) => {
+  async (req, res) => {
     const { collectionId } = req.body;
     const collection = db.collections.find((item) => item.id === collectionId);
     if (!collection) {
@@ -282,9 +302,28 @@ app.post(
     const targetPath = path.join(config.localStoragePath, fileName);
     fs.renameSync(req.file.path, targetPath);
 
-    const detectedFaces = Array.from({ length: 2 }, () => ({
-      embedding: createFaceEmbedding(),
-    }));
+    let detectedFaces = [];
+    if (config.faceDetectionMode === "local") {
+      if (!faceModelsReady && ensureModelsPresent()) {
+        faceModelsReady = await initializeFaceDetection();
+      }
+      if (!faceModelsReady) {
+        return res.status(503).json({
+          error: "Face detection models are not available.",
+          hint: "Download models into /models and restart the server.",
+        });
+      }
+      try {
+        const buffer = fs.readFileSync(targetPath);
+        detectedFaces = await detectFacesFromBuffer(buffer);
+      } catch (error) {
+        return res.status(500).json({ error: "Face detection failed." });
+      }
+    } else {
+      detectedFaces = Array.from({ length: 2 }, () => ({
+        embedding: createFaceEmbedding(),
+      }));
+    }
     const groupIds = groupFaces(
       collectionId,
       detectedFaces.map((face) => face.embedding),

@@ -6,6 +6,7 @@ Minimalistic photo collection MVP skeleton with role-based access control and fa
 - **In-memory API** for authentication, collections, photos, face groups, and sharing.
 - **RBAC middleware** that enforces Owner/Member/Viewer permissions.
 - **Local storage mode** for photo uploads with environment toggles for future cloud mode.
+- **Local face detection** powered by `@vladmandic/face-api` + TensorFlow.js (requires models).
 - **Static UI** showcasing sidebar navigation, photo grid, and face-group toggle.
 
 ## Quick Start
@@ -24,6 +25,18 @@ STORAGE_TYPE=local
 FACE_DETECTION_MODE=local
 LOCAL_STORAGE_PATH=./storage
 JWT_SECRET=replace-me
+```
+
+## Face Detection Models (Local)
+For local face detection, download the face-api.js models into a `models/` folder:
+```
+mkdir -p models
+curl -L https://github.com/vladmandic/face-api/raw/master/model/ssd_mobilenetv1_model-weights_manifest.json -o models/ssd_mobilenetv1_model-weights_manifest.json
+curl -L https://github.com/vladmandic/face-api/raw/master/model/ssd_mobilenetv1_model-shard1 -o models/ssd_mobilenetv1_model-shard1
+curl -L https://github.com/vladmandic/face-api/raw/master/model/face_landmark_68_model-weights_manifest.json -o models/face_landmark_68_model-weights_manifest.json
+curl -L https://github.com/vladmandic/face-api/raw/master/model/face_landmark_68_model-shard1 -o models/face_landmark_68_model-shard1
+curl -L https://github.com/vladmandic/face-api/raw/master/model/face_recognition_model-weights_manifest.json -o models/face_recognition_model-weights_manifest.json
+curl -L https://github.com/vladmandic/face-api/raw/master/model/face_recognition_model-shard1 -o models/face_recognition_model-shard1
 ```
 
 ## API Summary
@@ -46,5 +59,5 @@ GET  /faces/:id/photos
 ```
 
 ## Notes
-- Face detection is mocked with random embeddings to illustrate the workflow.
+- Face detection runs locally when models are available; non-local modes fall back to mock embeddings.
 - Storage is local by default; plug in Supabase or another provider via environment variables later.
