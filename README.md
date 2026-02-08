@@ -17,6 +17,12 @@ npm run dev
 
 Open `http://localhost:3000` to view the UI.
 
+### Local Demo Logins (APP_ENV=local)
+The local environment seeds demo users so you can test each role immediately:
+- **Owner:** `owner@local.dev` / `owner123`
+- **Member:** `member@local.dev` / `member123`
+- **Viewer:** `viewer@local.dev` / `viewer123`
+
 ## Environment Variables
 Create a `.env` file for configuration:
 ```

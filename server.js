@@ -33,6 +33,40 @@ const db = {
   permissions: [],
 };
 
+const seedDemoUsers = () => {
+  if (config.appEnv !== "local" || db.users.length > 0) {
+    return;
+  }
+  const now = new Date().toISOString();
+  const demoUsers = [
+    {
+      id: nanoid(),
+      name: "Local Owner",
+      email: "owner@local.dev",
+      password: bcrypt.hashSync("owner123", 10),
+      role: "OWNER",
+      createdAt: now,
+    },
+    {
+      id: nanoid(),
+      name: "Local Member",
+      email: "member@local.dev",
+      password: bcrypt.hashSync("member123", 10),
+      role: "MEMBER",
+      createdAt: now,
+    },
+    {
+      id: nanoid(),
+      name: "Local Viewer",
+      email: "viewer@local.dev",
+      password: bcrypt.hashSync("viewer123", 10),
+      role: "VIEWER",
+      createdAt: now,
+    },
+  ];
+  db.users.push(...demoUsers);
+};
+
 const ensureStorage = () => {
   if (!fs.existsSync(config.localStoragePath)) {
     fs.mkdirSync(config.localStoragePath, { recursive: true });
@@ -40,6 +74,7 @@ const ensureStorage = () => {
 };
 
 ensureStorage();
+seedDemoUsers();
 
 app.use(express.json());
 app.use("/ui", express.static(path.join(process.cwd(), "ui")));
