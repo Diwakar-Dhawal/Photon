@@ -17,6 +17,27 @@ npm run dev
 
 Open `http://localhost:3000` to view the UI.
 
+### Node.js Version (Windows)
+If `npm install` fails on Windows when installing `@tensorflow/tfjs-node`, use Node 20 or 22 LTS. Node 24 often lacks prebuilt binaries and forces a native build that fails without full C++ tooling.
+
+**Using nvm-windows (recommended):**
+```bash
+nvm install 22
+nvm use 22
+nvm alias default 22
+```
+
+Then reinstall dependencies:
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+**Manual install:**
+1. Uninstall Node 24 from Apps & Features.
+2. Install Node 22 LTS from https://nodejs.org/en/download
+3. Reinstall dependencies as above.
+
 ### Local Demo Logins (APP_ENV=local)
 The local environment seeds demo users so you can test each role immediately:
 - **Owner:** `owner@local.dev` / `owner123`
